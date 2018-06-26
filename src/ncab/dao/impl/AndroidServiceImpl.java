@@ -538,7 +538,7 @@ public class AndroidServiceImpl {
         JSONArray jsonarray=new JSONArray();
         DBConnectionRo dbconnection = new DBConnectionRo();
         Connection connection = (Connection) dbconnection.getConnection();
-        String sql = "SELECT (SELECT CONCAT(Emp_FName,' ',Emp_LName) FROM ncab_master_employee_tbl WHERE Emp_Qlid=?) AS Emp_Name,Rqst_Date_Time,Start_Date_Time,End_Date_Time,Approval,Source,Destination,Reason FROM NCAB_UNSCHEDULE_RQST_TBL WHERE Emp_Qlid=?";
+        String sql = "SELECT (SELECT CONCAT(Emp_FName,' ',Emp_LName) FROM ncab_master_employee_tbl WHERE Emp_Qlid=?) AS Emp_Name,Rqst_Date_Time,Start_Date_Time,End_Date_Time,Approval,Source,Destination,Reason,Request_ID FROM NCAB_UNSCHEDULE_RQST_TBL WHERE Emp_Qlid=?";
         PreparedStatement ps;
  
         try {
@@ -561,7 +561,7 @@ public class AndroidServiceImpl {
                      jsonresponse.put("Source",rs.getString(6));
                      jsonresponse.put("Destination",rs.getString(7));
                      jsonresponse.put("Reason",rs.getString(8));
-                      
+                     jsonresponse.put("Req_Id",rs.getString(9)); 
                      jsonarray.put(jsonresponse);
         
                }
@@ -581,7 +581,7 @@ public class AndroidServiceImpl {
         JSONArray jsonarray=new JSONArray();
         DBConnectionRo dbconnection = new DBConnectionRo();
         Connection connection = (Connection) dbconnection.getConnection();
-        String sql = "SELECT a.Rqst_Date_Time,a.Start_Date_Time,a.End_Date_Time,a.Approval,a.Source,a.Destination,a.Reason,b.Emp_FName,b.Emp_LName FROM NCAB_UNSCHEDULE_RQST_TBL AS a, ncab_master_employee_tbl AS b  WHERE a.Emp_Qlid=b.Emp_Qlid AND a.Approvers like '%"+Emp_Qlid+"%' order by a.Approval desc";
+        String sql = "SELECT a.Rqst_Date_Time,a.Start_Date_Time,a.End_Date_Time,a.Approval,a.Source,a.Destination,a.Reason,b.Emp_FName,b.Emp_LName,a.Request_ID FROM NCAB_UNSCHEDULE_RQST_TBL AS a, ncab_master_employee_tbl AS b  WHERE a.Emp_Qlid=b.Emp_Qlid AND a.Approvers like '%"+Emp_Qlid+"%' order by a.Approval desc";
         PreparedStatement ps;
  
         try {
@@ -603,7 +603,7 @@ public class AndroidServiceImpl {
                      jsonresponse.put("Source",rs.getString(5));
                      jsonresponse.put("Destination",rs.getString(6));
                      jsonresponse.put("Reason",rs.getString(7));
-                     
+                     jsonresponse.put("Req_Id",rs.getString(10));
                      jsonarray.put(jsonresponse);
         
                }

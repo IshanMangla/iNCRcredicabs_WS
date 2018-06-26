@@ -155,6 +155,38 @@ public class AndroidService {
           return response;
   	 }
 
+       @POST
+       @Produces(MediaType.APPLICATION_JSON)
+       @Path("/NotificationsByMe")
+       public Response RequestsByMe(String jsonreq) throws ParseException{
+         AndroidServiceImpl demodaoimpl=new AndroidServiceImpl();
+                JSONObject jsonrequest=new JSONObject(jsonreq);
+         JSONObject jsonresponse = new JSONObject();
+         jsonresponse = demodaoimpl.getRequestsbyme(jsonrequest.getString("Emp_Qlid"));
+
+         Response response = Response.status(200).type("application/json").entity(jsonresponse.toString()).build();
+
+              return response;
+       }
+       
+       @POST
+       @Produces(MediaType.APPLICATION_JSON)
+       @Path("/NotificationsForMe")
+       public Response RequestsForMe(String jsonreq) throws ParseException{
+         AndroidServiceImpl demodaoimpl=new AndroidServiceImpl();
+                JSONObject jsonrequest=new JSONObject(jsonreq);
+         JSONObject jsonresponse = new JSONObject();
+         jsonresponse = demodaoimpl.getRequestsforme(jsonrequest.getString("Emp_Qlid"));
+
+         Response response = Response.status(200).type("application/json").entity(jsonresponse.toString()).build();
+
+              return response;
+          
+          
+       }
+
+       
+       
        public Response DetailsByEmpID(String jsonrequest) {
           AndroidServiceImpl demodaoimpl=new AndroidServiceImpl();
           System.out.println(jsonrequest);
@@ -174,37 +206,8 @@ public class AndroidService {
            return response;
          }
        
-       @Path("/NotificationsByMe")
-     @POST
-     @Produces(MediaType.APPLICATION_JSON)
-     public Response RequestsByMe(String jsonreq) throws ParseException{
-       AndroidServiceImpl demodaoimpl=new AndroidServiceImpl();
-              JSONObject jsonrequest=new JSONObject(jsonreq);
-       JSONObject jsonresponse = new JSONObject();
-       jsonresponse = demodaoimpl.getRequestsbyme(jsonrequest.getString("Emp_Qlid"));
+      
 
-       Response response = Response.status(200).type("application/json").entity(jsonresponse.toString()).build();
-
-            return response;
-        
-        
-     }
-     
-     @Path("/NotificationsForMe")
-     @POST
-     @Produces(MediaType.APPLICATION_JSON)
-     public Response RequestsForMe(String jsonreq) throws ParseException{
-       AndroidServiceImpl demodaoimpl=new AndroidServiceImpl();
-              JSONObject jsonrequest=new JSONObject(jsonreq);
-       JSONObject jsonresponse = new JSONObject();
-       jsonresponse = demodaoimpl.getRequestsforme(jsonrequest.getString("Emp_Qlid"));
-
-       Response response = Response.status(200).type("application/json").entity(jsonresponse.toString()).build();
-
-            return response;
-        
-        
-     }
 
 
 }
