@@ -288,7 +288,12 @@ public class RequestService {
 
 		}
 
-		result=requestServiceImpl.saveRequest(Emp_QLID,Shift_ID,Start_Date_Time,End_Date_Time,Source , Destination , other,Reason);	
+		if (Counter == 1)
+			result=requestServiceImpl.saveRequest(Emp_QLID,Shift_ID,Start_Date_Time,End_Date_Time,Source , Destination , other,Reason,Mgr_QLID);            
+			else
+			result=requestServiceImpl.saveRequest(Emp_QLID,Shift_ID,Start_Date_Time,End_Date_Time,Source , Destination , other,Reason, Mgr_QLID+","+Level2_mgr);          
+
+		
 
 		if (result>0) {sendPushService = new UtilServiceImpl();
 		sendMailService =new UtilServiceImpl();

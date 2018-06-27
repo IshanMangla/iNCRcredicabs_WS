@@ -45,14 +45,14 @@ public class RequestServiceImpl {
 
 	}
 
-	public int saveRequest(String emp_QLID, String shift_ID, String Start_Date_Time, String End_Date_Time,String source ,String destination , String other_addr,String reason) {
+	public int saveRequest(String emp_QLID, String shift_ID, String Start_Date_Time, String End_Date_Time,String source ,String destination , String other_addr,String reason,String Approvers) {
 		// TODO Auto-generated method stub
 		int result=0;
 
 		try {	
 			con=(Connection) dbconnectionUpd.getConnection();
 
-			PreparedStatement ps = con.prepareStatement("insert into NCAB_UNSCHEDULE_RQST_TBL (Emp_Qlid,Shift_ID,Rqst_Date_Time,Start_Date_Time,End_Date_Time,Source,Destination, Other_Addr ,Reason) values (?,?,?,?,?,?,?,?,?) "
+			PreparedStatement ps = con.prepareStatement("insert into NCAB_UNSCHEDULE_RQST_TBL (Emp_Qlid,Shift_ID,Rqst_Date_Time,Start_Date_Time,End_Date_Time,Source,Destination, Other_Addr ,Reason, Approvers) values (?,?,?,?,?,?,?,?,?,?) "
 					,Statement.RETURN_GENERATED_KEYS);
 
 			ps.setString(1,emp_QLID);
@@ -64,6 +64,7 @@ public class RequestServiceImpl {
 			ps.setString(7,destination);
 			ps.setString(8,other_addr);
 			ps.setString(9,reason);
+			ps.setString(10,Approvers);
 			ps.executeUpdate();
 
 			ResultSet rs = ps.getGeneratedKeys();
